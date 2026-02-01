@@ -3,6 +3,7 @@ import cors from "cors";
 import { toNodeHandler } from "better-auth/node";
 import { fromNodeHeaders } from "better-auth/node";
 import { auth } from './lib/auth';
+import ChatRouter from './routes/chat.routes';
 
 const app = express();
 
@@ -19,6 +20,8 @@ app.all("/api/auth/*splat", toNodeHandler(auth));
 
 
 app.use(express.json());
+
+app.use('/api/chat', ChatRouter);
 
 app.use((req, res, next) => {
     console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
